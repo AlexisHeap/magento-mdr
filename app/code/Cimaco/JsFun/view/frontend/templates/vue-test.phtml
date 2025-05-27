@@ -1,0 +1,30 @@
+<?php
+/**
+ * The view model is then referenced by it's name and assigned to a variable, using PHP & Magento
+ * naming conventions of camelCase for variable names. Also remember to typehint your view model.
+ */
+
+/** @var \Cimaco\JsFun\ViewModel\Message $messageViewModel */
+$messageViewModel = $block->getData('message_view_model');
+?>
+
+<div id="vue-test">
+    <h1>{{ message }}</h1>
+</div>
+
+<script>
+/**
+ * Define the `require` statement inline of your PHTML template. RequireJS will automatically pull in
+ * the required dependencies, and fire off your callback after they have resolved.
+ */
+require(['vue'], function(Vue) {
+    'use strict'
+    
+    new Vue({
+        el: '#vue-test',
+        data: {
+            message: "<?= $messageViewModel->getMessage() ?>"
+        }
+    });
+});
+</script>
